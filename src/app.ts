@@ -3,10 +3,10 @@ import { DataSource } from "typeorm";
 import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
-import Controller from '@/utils/interfaces/controller.interface';
-import errorMiddleware from '@/middleware/error.middleware';
+import Controller from './resources/student/student.controller'
+import errorMiddleware from './middleware/error.middleware';
 import helmet from 'helmet';
-
+import { join } from 'path';
 class App{
     public express: Application;
     public port: number;
@@ -45,10 +45,10 @@ class App{
         const AppDataSource = new DataSource({
           type: "sqlite",
           database: "backend-test.db",
-          synchronize: true,
+          synchronize: false,
           logging: true,
-          entities: ["src/entity/**/*.ts"],
-          migrations: ["src/migration/**/*.ts"],
+          entities: [join(__dirname, '**', '*.model.{ts,js}')],
+        //   migrations: ["src/migration/**/*.ts"],
         });
             AppDataSource.initialize();
     }
