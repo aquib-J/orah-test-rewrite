@@ -1,5 +1,5 @@
 import Student from "./student.model";
-import { IStudent,UpdateStudent } from 'resources/student/student.interface';
+import { IStudent,UpdateStudent } from 'types/student.interface';
 
 class StudentService {
   /**
@@ -12,9 +12,8 @@ class StudentService {
             newStudent.last_name = student.last_name;
             newStudent.photo_url = student.photo_url;
 
-            const savedStudent = await newStudent.save();
-            console.log(savedStudent)
-            return savedStudent;
+            return await newStudent.save();
+            
         } catch (err) {
             console.error(err);
             throw new Error('Unable to create a Student,Please try again');

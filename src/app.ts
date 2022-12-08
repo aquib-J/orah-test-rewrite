@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
-import Controller from './resources/student/student.controller'
+import Controller from './utils/interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 import helmet from 'helmet';
 import { join } from 'path';
@@ -42,7 +42,7 @@ class App{
     }
 
     private initialiseDatabaseConnection(): void{
-        const AppDataSource = new DataSource({
+       let AppDataSource = new DataSource({
           type: "sqlite",
           database: "backend-test.db",
           synchronize: false,
